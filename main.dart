@@ -1,142 +1,153 @@
+import 'package:flutter/material.dart';
+
 void main() {
-  // Define variables of different types
-  int myInt = 10;
-  double myDouble = 10.5;
-  String myString = "Hello Dart";
-  bool myBool = true;
-  List<int> myList = [1, 2, 3, 4, 5];
-
-  print(myInt);
-  print(myDouble);
-  print(myString);
-  print(myBool);
-  print(myList);
-
-  // Call functions here
-  convertAndDisplay("42");
-  checkNumber(5);
-  checkVotingEligibility(20);
-  printDayOfWeek(3);
-
-  // For loop: 1 to 10
-  for (int i = 1; i <= 10; i++) {
-    print(i);
-  }
-
-  // While loop: 10 to 1
-  int j = 10;
-  while (j >= 1) {
-    print(j);
-    j--;
-  }
-
-  // Do-while loop: 1 to 5
-  int k = 1;
-  do {
-    print(k);
-    k++;
-  } while (k <= 5);
-
-  // Complex example call
-  complexExample();
+  runApp(const MyApp());
 }
 
-// Convert String to int
-int stringToInt(String s) {
-  return int.parse(s);
-}
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-// Convert String to double
-double stringToDouble(String s) {
-  return double.parse(s);
-}
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'My Flutter App',
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('My Flutter App'), // Title Bar
+        ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Styled Container with Welcome Message
+              Container(
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade100,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Colors.blue.shade400, width: 2),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Welcome to My Flutter App!',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blueAccent,
+                    ),
+                  ),
+                ),
+              ),
 
-// Convert int to String
-String intToString(int i) {
-  return i.toString();
-}
+              const SizedBox(height: 20),
 
-// Convert int to double
-double intToDouble(int i) {
-  return i.toDouble();
-}
+              // Interactive ElevatedButton
+              ElevatedButton(
+                onPressed: () {
+                  print('Button Clicked!');
+                },
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 12),
+                  child: Text(
+                    'Click Me',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ),
 
-void convertAndDisplay(String numberStr) {
-  int intValue = int.parse(numberStr);
-  double doubleValue = double.parse(numberStr);
+              const SizedBox(height: 20),
 
-  print('String to int: $intValue');
-  print('String to double: $doubleValue');
-}
+              // Image from the internet
+              Image.network(
+                'https://flutter.dev/assets/homepage/carousel/slide_1-bg-455fb8a4f3db12e53a6d5702103dfdf599930a9f0c7b872d4a29ad27e08a04d0.png',
+                height: 150,
+                fit: BoxFit.cover,
+              ),
 
-void checkNumber(int number) {
-  if (number > 0) {
-    print('$number is positive');
-  } else if (number < 0) {
-    print('$number is negative');
-  } else {
-    print('$number is zero');
-  }
-}
+              const SizedBox(height: 40),
 
-void checkVotingEligibility(int age) {
-  if (age >= 18) {
-    print('You are eligible to vote');
-  } else {
-    print('You are not eligible to vote');
-  }
-}
+              // Login Layout starts here
+              const Text(
+                'Login',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+                textAlign: TextAlign.center,
+              ),
 
-void printDayOfWeek(int day) {
-  switch(day) {
-    case 1:
-      print('Monday');
-      break;
-    case 2:
-      print('Tuesday');
-      break;
-    case 3:
-      print('Wednesday');
-      break;
-    case 4:
-      print('Thursday');
-      break;
-    case 5:
-      print('Friday');
-      break;
-    case 6:
-      print('Saturday');
-      break;
-    case 7:
-      print('Sunday');
-      break;
-    default:
-      print('Invalid day');
-  }
-}
+              const SizedBox(height: 20),
 
-void complexExample() {
-  List<int> numbers = [3, 12, 105, 7, 50];
+              // Username TextField
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Username',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  prefixIcon: const Icon(Icons.person),
+                ),
+              ),
 
-  for (var number in numbers) {
-    print('Number: $number');
+              const SizedBox(height: 16),
 
-    // Check even or odd
-    if (number % 2 == 0) {
-      print('Even');
-    } else {
-      print('Odd');
-    }
+              // Password TextField
+              TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  prefixIcon: const Icon(Icons.lock),
+                ),
+              ),
 
-    // Categorize number using if-else instead of switch for ranges
-    if (number >= 1 && number <= 10) {
-      print('Small');
-    } else if (number >= 11 && number <= 100) {
-      print('Medium');
-    } else {
-      print('Large');
-    }
+              const SizedBox(height: 20),
 
-    print('---');
+              // Row with Login and Register buttons
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        print('Login button pressed');
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 14),
+                        child: Text(
+                          'Login',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(width: 16),
+
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {
+                        print('Register button pressed');
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 14),
+                        child: Text(
+                          'Register',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
